@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Final Exam Voices</title>
+    <link rel="stylesheet" href="style.v02.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <!-- <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=VT323&display=swap" rel="stylesheet">
+  </head>
+  <body onload="printShuffled()">
+    <script>
+      var voix = [
+        "Steve Lacy (sax)",
+        // "Miles Davis",
+        "Morton Feldman",
+        "Horațiu Rădulescu",
+        "Gérard Grisey",
+        "Erik Satie",
+        "Pauline Oliveros",
+        "Brian Ferneyhough",
+        "Georges Aperghis",
+        "György Kurtág",
+        "Mary Lou Williams",
+        "Jeanne Demessieux",
+        "Carla Bley",
+        "Robert Ashley",
+        "Fausto Romitelli",
+        "Ana-Maria Avram",
+        "Joelle Leandre",
+        "Irène Schweizer",
+        "Joanna Bailie",
+        "Olivier Messiaen",
+        "Franz Schreker",
+        "Maryanne Amacher"
+      ];
+
+      voixLen = voix.length;
+      // source: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+      function shuffle(array) {
+        let currentIndex = array.length,  randomIndex;
+        // While there remain elements to shuffle...
+        while (0 !== currentIndex) {
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+          array[randomIndex], array[currentIndex]];
+        }
+        return array;
+      }
+
+      function openNewTab(elemWithText){
+        let TextInsideP = elemWithText.getElementsByTagName('p')[0].innerHTML;
+        let search = "http://google.com/search?q=" + TextInsideP;
+        let redirectWindow = window.open(search, '_blank');
+          redirectWindow.location;
+      }
+
+      var voixShuffled = shuffle(voix);
+      var voixAppended = [];
+      // for (i = 0; i < voixLen; i++) {
+      //   voixAppended.push("<p>" + voixShuffled[i] + "</p>");
+      // }
+      for (i = 0; i < voixLen; i++) {
+        scrollBool = Math.random() < 0.5;
+        scrollDirection = null;
+        if (scrollBool) {
+          scrollDirection = "right";
+        } else {
+          scrollDirection = "left";
+        }
+        scrollAmt = (Math.floor(Math.random() * 100) + 20).toString();
+        voixAppended.push("<marquee behavior=\"scroll\" direction=\"" + scrollDirection + "\" scrollamount=\"" + scrollAmt + "\" onmouseover=\"this.stop();\" onmouseout=\"this.start();\" onclick=\"openNewTab(this);\"><p>" + voixShuffled[i] + "</p></marquee>");
+      }
+      var voixNoSeparator = voixAppended.join("");
+
+      // source: https://www.w3schools.com/jsref/prop_html_innerhtml.asp
+      function printShuffled() {
+        document.getElementById("lesVoix").innerHTML = voixNoSeparator;
+      }
+
+    </script>
+
+    <div id="lesVoix"><p><em>loading...</em></p></div>
+
+  </body>
+</html>
