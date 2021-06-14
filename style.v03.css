@@ -55,7 +55,7 @@ body, p {
 
 #markee {
   position: absolute;
-  top: 5px;
+  top: 30px;
   left: 1vh;
   z-index: 10;
   display: flex;
@@ -68,8 +68,8 @@ body, p {
 
 .vl {
   /* border-left: 0.25vw solid #6593A6; */
-  border-left: 50px solid #6593A6;
-  height: 45vh;
+  border-left: 0.4vw solid #6593A6;
+  height: 100px;
 }
 
 .markeeText {
